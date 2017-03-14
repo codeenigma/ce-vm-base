@@ -1,7 +1,6 @@
 #!/bin/sh
 #
-# Export an existing VM and detach it from Puppet.
-# This is to share VMs with external dev teams outside CE.
+# (Re)-build a Code Enigma base box
 #
 
 
@@ -11,7 +10,6 @@ usage:
 
 Export a base CodeEnigma VM.
 $0 </path/to/where/to/export/the/box>
-
 
 EOF
 }
@@ -63,4 +61,5 @@ echo "Base box has been created at $1/jessie64.box"
 echo "Press [ENTER] to proceed and destroy the temporary VM."
 read DESTROY
 vagrant destroy -f
+echo "Image is ready to be published on Atlas"
 exit
