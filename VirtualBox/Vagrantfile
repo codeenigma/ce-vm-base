@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+VAGRANTFILE_API_VERSION = '2' unless defined? VAGRANTFILE_API_VERSION
+
+# Inline provisioning.
+$provision = <<SCRIPT
+echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" > /etc/apt/sources.list.d/ansible.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 && \
+apt-get update
+apt-get dist-upgrade -y
+apt-get install -y rsync linux-headers-amd64 make dkms cpp binutils fakeroot gcc openssh-server curl sudo apt-utils ansible git apt-transport-https build-essential unzip vim software-properties-common wget
+SCRIPT
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "pmce/jessie64"
+  #config.vm.box_url = "file://./jessie64.box"
+  config.vm.hostname = "ce-base-vm"
+  config.vm.network :private_network, ip: "192.168.56.2"
+  config.ssh.insert_key = false
+  config.vm.provision "shell", inline: $provision
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.provider :virtualbox do |vb|
+    #vb.gui = true
+    vb.name = "ce-base-vm"
+    vb.customize ["modifyvm", :id, "--memory", "4096"]
+  end
+    
+end
