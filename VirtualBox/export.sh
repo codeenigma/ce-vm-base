@@ -40,7 +40,10 @@ PROJECT_WORK_DIR=`mktemp -d /tmp/boxce.XXXXXXXXXX`
 echo "2. Copy Vagrantfile to the working directory"
 cp "$OWN_DIR/Vagrantfile" "$PROJECT_WORK_DIR/"
 
-echo "3. Bring up and provision the base box"
+echo "3. Ensure base box is up to date"
+vagrant box update
+
+echo "4. Bring up and provision the base box"
 cd "$PROJECT_WORK_DIR"
 vagrant up
 
@@ -48,14 +51,14 @@ echo "Machine is up, you can ssh to it and make manual amends:"
 echo "cd $PROJECT_WORK_DIR && vagrant ssh"
 echo "Press [ENTER] when you are done, to trigger the box package."
 read PROCEED
-echo "4. Cleaning up disk space."
+echo "5. Cleaning up disk space."
 vagrant ssh -c 'sudo umount -a'
 vagrant ssh -c 'sudo rm -rf /vagrant'
 vagrant ssh -c 'rm -rf ~/*'
 vagrant ssh -c 'dd if=/dev/zero of=zerofile bs=1M'
 vagrant ssh -c 'rm zerofile'
 vagrant halt
-echo "5. Creating package."
+echo "6. Creating package."
 vagrant package --output "$1/jessie64.box"
 echo "Base box has been created at $1/jessie64.box"
 echo "Press [ENTER] to proceed and destroy the temporary VM."

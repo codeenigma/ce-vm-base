@@ -3,15 +3,11 @@ FROM debian:jessie
 RUN \
   set -x && \
   export DEBIAN_FRONTEND=noninteractive && \
-  mkdir -p '/home/vagrant/.CodeEnigma/ce-vm/cache' && \
-  mv '/var/cache/apt' '/home/vagrant/.CodeEnigma/ce-vm/cache/' && \
-  echo 'Dir{Cache /home/vagrant/.CodeEnigma/ce-vm/cache/apt}' > /etc/apt/apt.conf.d/90ce-vm-aptcache && \
-  echo 'Dir::Cache /home/vagrant/.CodeEnigma/ce-vm/cache/apt;' >> /etc/apt/apt.conf.d/90ce-vm-aptcache && \
   echo 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main' > /etc/apt/sources.list.d/ansible.list && \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 && \
   apt-get update && \
-  apt-get dist-upgrade -y && \
-  apt-get install -y rsync linux-headers-amd64 make dkms cpp binutils fakeroot gcc openssh-server curl sudo apt-utils ansible git apt-transport-https build-essential unzip vim software-properties-common wget && \
+  apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
+  apt-get install -y -o Dpkg::Options::="--force-confnew" ansible apt-transport-https apt-utils binutils cron curl git rsync openssh-server postfix procmail python-apt python-pycurl sudo unzip vim wget && \
   useradd -s /bin/bash vagrant && \
   echo vagrant:vagrant | chpasswd -m && \
   install -m 755 -o vagrant -g vagrant -d /home/vagrant && \
@@ -31,3 +27,4 @@ RUN \
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
+
