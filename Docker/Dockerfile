@@ -7,7 +7,7 @@ RUN \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 && \
   apt-get update && \
   apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
-  apt-get install -y -o Dpkg::Options::="--force-confnew" ansible apt-transport-https apt-utils binutils cron curl git rsync openssh-server postfix procmail python-apt python-pycurl sudo unzip vim wget && \
+  apt-get install -y -o Dpkg::Options::="--force-confnew" ansible apt-transport-https apt-utils binutils cron curl git rsync openssh-server postfix procmail python-apt python-pycurl sudo unzip vim wget zsh && \
   useradd -s /bin/bash vagrant && \
   echo vagrant:vagrant | chpasswd -m && \
   install -m 755 -o vagrant -g vagrant -d /home/vagrant && \

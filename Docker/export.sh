@@ -29,6 +29,6 @@ OWN_DIR=$( cd "$( dirname "$OWN" )" && pwd -P)
 echo "1. Building the image"
 docker image build --compress --label=jessie64 --no-cache=true -t pmce/jessie64:$1 "$OWN_DIR" || exit 1
 
-echo "Image is ready to be published with 'docker image push pmce/jessie64'"
+echo "Image is ready to be published with docker image push pmce/jessie64:$1"
 echo "Do not forget to increment the version tag"
 exit
