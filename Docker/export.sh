@@ -1,7 +1,9 @@
 #!/bin/sh
 #
-# (Re)build a Docker base box.
+# (Re)build a Docker base box for ce-vm.
 #
+
+IMAGES="base app log db"
 
 usage(){
   cat << EOF
@@ -26,9 +28,14 @@ if [ -z "$OWN" ]; then
 fi
 OWN_DIR=$( cd "$( dirname "$OWN" )" && pwd -P)
 
-echo "1. Building the image"
-docker image build --compress --label=jessie64 --no-cache=true -t pmce/jessie64:$1 "$OWN_DIR" || exit 1
-
-echo "Image is ready to be published with docker image push pmce/jessie64:$1"
-echo "Do not forget to increment the version tag"
-exit
+# Ensure we have a fresh image to start with.
+docker image pull debian:jessie-slim
+# Build all images recursively.
+for IMAGE in $IMAGES; do
+  echo "1. Building the image"
+  docker image build --compress --label=ce-vm-$IMAGE:$1 --no-cache=true -t "pmce/ce-vm-$IMAGE:$1" "$OWN_DIR/$IMAGE" || exit 1
+  echo "Publishing the image with docker image push pmce/ce-vm-$IMAGE:$1"
+  docker image push "pmce/ce-vm-$IMAGE:$1"
+  # Ensure we have a fresh image to start with.
+  docker image pull pmce/ce-vm-base:$1
+done
