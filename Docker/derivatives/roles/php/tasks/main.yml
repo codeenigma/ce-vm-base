@@ -15,6 +15,10 @@
     mode: 0644
     force: yes
 
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+
 - name: Install PHP packages.
   apt: "name={{ item }} state=present"
   with_items:
