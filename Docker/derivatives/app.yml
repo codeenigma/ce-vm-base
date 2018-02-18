@@ -10,3 +10,5 @@
     - { role: php, php_version: 7.0 }
     #- { role: php, php_version: 7.1 }
     #- { role: php, php_version: 7.2 }
+    - { role: composer }
+    - { role: php_messdetector }
