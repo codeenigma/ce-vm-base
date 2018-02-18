@@ -1,4 +1,4 @@
-FROM debian:jessie-slim
+FROM debian:jessie
 
 RUN \
   set -x && \
