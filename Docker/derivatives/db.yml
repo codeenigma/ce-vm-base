@@ -3,6 +3,6 @@
 - hosts: localhost
   
   roles:
-    - { role: mysql, mysql_engine: percona-server }
+#    - { role: mysql, mysql_engine: percona-server }
     - { role: memcached }
     - { role: redis }
