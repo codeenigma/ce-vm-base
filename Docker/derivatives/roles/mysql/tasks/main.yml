@@ -1,0 +1,51 @@
+---
+# Install mysql
+
+# Add Percona repo if needed.
+- name: Add repository key for Percona repository.
+  apt_key: keyserver=keys.gnupg.net id=8507EFA5 state=present
+  
+- name: Add repository for Percona.
+  apt_repository: repo='deb https://repo.percona.com/apt jessie main' state=present
+
+- name: Add source repository for Percona.
+  apt_repository: repo='deb-src https://repo.percona.com/apt jessie main' state=present
+
+- name: Pin Percona packages.
+  template:
+    src: percona.pref.j2
+    dest: "/etc/apt/preferences.d/percona.pref"
+    owner: root
+    group: root
+    mode: 0644
+    force: yes
+
+- name: Ensure mysql is installed.
+  apt:
+    pkg: "{{ mysql_engine }}-server"
+    state: present
+
+- name: Copy Percona overriding configuration in place.
+  template:
+    src: percona_dev.cnf.j2
+    dest: "/etc/mysql/conf.d/dev.cnf"
+    owner: root
+    group: root
+    mode: 0644
+    force: yes
+  
+- name: Restart mysql.
+  service: name=mysql state=restarted enabled=yes
+
+- name: Update MySQL root password.
+  shell: >
+    mysql -u root -NBe 'GRANT ALL ON *.* TO "root"@"%" WITH GRANT OPTION;'
+
+- name: create "dev" MySQL user.
+  shell: >
+    mysql -u root -NBe 'GRANT ALL ON *.* TO "dev"@"%" IDENTIFIED BY "dev";'
+
+- name: Ensure python-mysqldb is installed.
+  apt:
+    pkg: "python-mysqldb"
+    state: present

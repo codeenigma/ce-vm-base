@@ -14,7 +14,7 @@
 - name: Pin Dotdeb packages.
   template:
     src: dotdeb.pref.j2
-    dest: "/etc/apt/preferences.d/dotdeb.pref"
+    dest: "/etc/apt/preferences.d/redis.pref"
     owner: root
     group: root
     mode: 0644
@@ -24,13 +24,3 @@
   apt:
     pkg: "redis-server"
     state: present
-
-- name: Copy startup script in place.
-  template:
-    src: startup.sh.j2
-    dest: "/opt/run-parts/postfix"
-    owner: root
-    group: root
-    mode: 0555
-    force: yes
-    

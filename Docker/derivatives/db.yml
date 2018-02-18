@@ -1,0 +1,9 @@
+---
+
+- hosts: localhost
+  
+  roles:
+    - { role: mysql }
+    - { role: memcached }
+    - { role: redis }
+    - { role: solr }
