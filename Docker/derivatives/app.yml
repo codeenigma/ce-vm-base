@@ -15,6 +15,6 @@
 
   tasks:
   - name: remove composer cache.
-  file:
-    path: '/home/vagrant/.composer/cache'
-    state: absent
+    file:
+      path: '/home/vagrant/.composer/cache'
+      state: absent
