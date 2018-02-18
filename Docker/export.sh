@@ -3,7 +3,7 @@
 # (Re)build a Docker base box for ce-vm.
 #
 
-IMAGES="log app db"
+IMAGES="db"
 
 usage(){
   cat << EOF
