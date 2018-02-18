@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/codeenigma/ce-vm-base.svg?branch=master)](https://travis-ci.org/codeenigma/ce-vm-base.svg?branch=master)
 # Base images creation helper scripts
 
 This is a companion repository to the main ce-vm stack. 
