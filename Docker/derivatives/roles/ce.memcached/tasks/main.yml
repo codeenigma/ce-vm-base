@@ -1,0 +1,7 @@
+---
+# Install memcached
+
+- name: Ensure memcached is installed.
+  apt:
+    pkg: memcached
+    state: present

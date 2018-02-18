@@ -3,7 +3,7 @@
 # (Re)build a Docker base box for ce-vm.
 #
 
-IMAGES="app log db"
+IMAGES="app"
 
 usage(){
   cat << EOF
@@ -35,12 +35,11 @@ echo "1. Building the image"
 docker image build --compress --label=ce-vm:$1 --no-cache=true -t "pmce/ce-vm:$1" "$OWN_DIR/base" || exit 1
 echo "Publishing the image with docker image push pmce/ce-vm:$1"
 docker image push "pmce/ce-vm:$1"
-docker image pull "pmce/ce-vm:$1"
 # Build all images recursively.
 for IMAGE in $IMAGES; do
+  docker image pull "pmce/ce-vm:$1"
   echo "1. Building the image"
-  docker image build --compress --label=ce-vm-$IMAGE:$1 --no-cache=true -t "pmce/ce-vm-$IMAGE:$1" "$OWN_DIR/$IMAGE" || exit 1
+  docker image build --compress --label=ce-vm-$IMAGE:$1 --no-cache=true -t "pmce/ce-vm-$IMAGE:$1" "$OWN_DIR/derivatives" --build-arg playBook=$IMAGE.yml --build-arg versionTag=$1 || exit 1
   echo "Publishing the image with docker image push pmce/ce-vm-$IMAGE:$1"
   docker image push "pmce/ce-vm-$IMAGE:$1"
-  # Ensure we have a fresh image to start with.
 done

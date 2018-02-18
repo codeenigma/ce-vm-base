@@ -1,0 +1,10 @@
+---
+
+- name: Ensure python-pip is installed.
+  apt:
+    pkg: python-pip
+    state: present
+
+- name: Install mkdocs via pip.
+  command: >
+    pip install mkdocs
