@@ -7,7 +7,7 @@ COPY ./roles /tmp/
 RUN \
   set -x && \
   export DEBIAN_FRONTEND=noninteractive && \
-  ansible-playbook /tmp/${playBook} && \
+  ansible-playbook -i 'localhost' /tmp/${playBook} && \
   apt-get update && \
   apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
   apt-get clean && \
