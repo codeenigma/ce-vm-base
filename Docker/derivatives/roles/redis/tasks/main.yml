@@ -6,7 +6,6 @@
   
 - name: Add repository for Dotdeb.
   apt_repository: repo='deb http://packages.dotdeb.org jessie all' state=present
-  when: mysql_engine == "percona-server"
 
 - name: Add source repository for Dotdeb.
   apt_repository: repo='deb-src http://packages.dotdeb.org jessie all' state=present
