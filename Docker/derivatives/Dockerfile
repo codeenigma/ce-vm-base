@@ -9,9 +9,7 @@ RUN \
   export DEBIAN_FRONTEND=noninteractive && \
   ansible-playbook /tmp/${playBook} && \
   apt-get update && \
-  apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+  apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew"
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
