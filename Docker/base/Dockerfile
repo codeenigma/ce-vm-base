@@ -21,6 +21,8 @@ RUN \
   echo 'UseDNS no' >> /etc/ssh/sshd_config && \
   mkdir -p /var/run/sshd && \
   rm /usr/sbin/policy-rc.d && \
+  rm -rf /var/lib/apt/lists/* && \
+  apt-get clean && \
   rm /etc/apt/apt.conf.d/docker-clean
 
 EXPOSE 22
