@@ -4,5 +4,5 @@
     
   roles:
     
-    - { role: nodejs , nodejs_version: 4.x}
+    - { role: nodejs , nodejs_version: 8.x}
     - { role: php , php_version: 7.0}
