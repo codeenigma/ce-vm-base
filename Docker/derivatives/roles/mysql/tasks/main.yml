@@ -26,15 +26,6 @@
   apt:
     pkg: "mysql-server"
     state: present
-
-- name: Copy MySQL overriding configuration in place.
-  template:
-    src: mysql_dev.cnf.j2
-    dest: "/etc/mysql/mysql.conf.d/zz_dev.cnf"
-    owner: root
-    group: root
-    mode: 0644
-    force: yes
       
 - name: Restart mysql.
   service: name=mysql state=restarted enabled=yes
