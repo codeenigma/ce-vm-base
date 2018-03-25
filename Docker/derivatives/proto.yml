@@ -1,8 +1,0 @@
----
-
-- hosts: localhost
-    
-  roles:
-    
-    - { role: nodejs , nodejs_version: 8.x}
-    - { role: php , php_version: 7.0}
