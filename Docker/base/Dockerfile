@@ -3,11 +3,14 @@ FROM debian:stretch
 RUN \
   set -x && \
   export DEBIAN_FRONTEND=noninteractive && \
+  apt-get update && \
+  apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
+  apt-get install -y -o Dpkg::Options::="--force-confnew" apt-transport-https apt-utils binutils cron curl git gnupg rsync openssh-server postfix procmail python-apt python-dev python-pycurl rsyslog sudo unzip vim wget zsh && \
   echo 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main' > /etc/apt/sources.list.d/ansible.list && \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 && \
   apt-get update && \
   apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
-  apt-get install -y -o Dpkg::Options::="--force-confnew" ansible apt-transport-https apt-utils binutils cron curl git gnupg rsync openssh-server postfix procmail python-apt python-dev python-pycurl rsyslog sudo unzip vim wget zsh && \
+  apt-get install -y -o Dpkg::Options::="--force-confnew" ansible && \
   useradd -s /bin/bash vagrant && \
   echo vagrant:vagrant | chpasswd -m && \
   install -m 755 -o vagrant -g vagrant -d /home/vagrant && \
