@@ -1,45 +1,47 @@
 ---
-# Install mysql
 
-# Add Percona repo if needed.
-- name: Add repository key for Percona repository.
-  apt_key: keyserver=keys.gnupg.net id=8507EFA5 state=present
-  
-- name: Add repository for Percona.
-  apt_repository: repo='deb https://repo.percona.com/apt stretch main' state=present
+- name: Add repository key for MySQL repository.
+  apt_key: keyserver=pgp.mit.edu id=A4A9406876FCBD3C456770C88C718D3B5072E1F5 state=present
 
-- name: Add source repository for Percona.
-  apt_repository: repo='deb-src https://repo.percona.com/apt stretch main' state=present
+- name: Add repository for MySQL.
+  apt_repository: repo='deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7' state=present
 
-- name: Pin Percona packages.
+- name: Add source repository for MySQL.
+  apt_repository: repo='deb-src http://repo.mysql.com/apt/debian/ jessie mysql-5.7' state=present
+
+- name: Pin MySQL packages.
   template:
-    src: percona.pref.j2
-    dest: "/etc/apt/preferences.d/percona.pref"
+    src: mysql.pref.j2
+    dest: "/etc/apt/preferences.d/mysql.pref"
     owner: root
     group: root
     mode: 0644
     force: yes
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
 
 - name: Ensure mysql is installed.
   apt:
-    pkg: "{{ mysql_engine }}-server"
+    pkg: "mysql-server"
     state: present
 
-- name: Copy Percona overriding configuration in place.
+- name: Copy MySQL overriding configuration in place.
   template:
-    src: percona_dev.cnf.j2
-    dest: "/etc/mysql/conf.d/dev.cnf"
+    src: mysql_dev.cnf.j2
+    dest: "/etc/mysql/mysql.conf.d/zz_dev.cnf"
     owner: root
     group: root
     mode: 0644
     force: yes
-  
+      
 - name: Restart mysql.
   service: name=mysql state=restarted enabled=yes
 
 - name: Update MySQL root password.
   shell: >
-    mysql -u root -NBe 'GRANT ALL ON *.* TO "root"@"%" WITH GRANT OPTION;'
+    mysql -u root -NBe 'GRANT ALL ON *.* TO "root"@"%" IDENTIFIED BY "root" WITH GRANT OPTION;'
 
 - name: create "dev" MySQL user.
   shell: >
