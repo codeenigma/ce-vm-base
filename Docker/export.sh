@@ -29,7 +29,7 @@ fi
 OWN_DIR=$( cd "$( dirname "$OWN" )" && pwd -P)
 
 # Ensure we have a fresh image to start with.
-docker image pull debian:jessie
+docker image pull debian:stretch
 # Build base image.
 echo "1. Building the image"
 docker image build --compress --label=ce-vm:$1 --no-cache=true -t "pmce/ce-vm:$1" "$OWN_DIR/base" || exit 1

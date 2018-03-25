@@ -5,8 +5,9 @@
   roles:
     - { role: php, php_version: 7.2 }
     - { role: php, php_version: 7.1 }
-    - { role: php, php_version: 7.0 }
     - { role: php, php_version: 5.6 }
+    - { role: php, php_version: 7.0 }
+    - { role: nodejs , nodejs_version: 8.x}
     - nginx
     - mkdocs
 

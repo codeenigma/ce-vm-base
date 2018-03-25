@@ -5,7 +5,7 @@
   apt_key: url=http://www.dotdeb.org/dotdeb.gpg state=present
 
 - name: Add DotDeb repository.
-  apt_repository: repo='deb http://packages.dotdeb.org jessie all' state=present
+  apt_repository: repo='deb http://packages.dotdeb.org stretch all' state=present
 
 - name: Pin Nginx packages.
   template:

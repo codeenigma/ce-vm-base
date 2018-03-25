@@ -6,10 +6,10 @@
   apt_key: keyserver=keys.gnupg.net id=8507EFA5 state=present
   
 - name: Add repository for Percona.
-  apt_repository: repo='deb https://repo.percona.com/apt jessie main' state=present
+  apt_repository: repo='deb https://repo.percona.com/apt stretch main' state=present
 
 - name: Add source repository for Percona.
-  apt_repository: repo='deb-src https://repo.percona.com/apt jessie main' state=present
+  apt_repository: repo='deb-src https://repo.percona.com/apt stretch main' state=present
 
 - name: Pin Percona packages.
   template:
