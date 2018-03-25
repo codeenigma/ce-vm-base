@@ -3,7 +3,7 @@
 # (Re)build a Docker base box for ce-vm.
 #
 
-IMAGES="app log memcached mysql solr"
+IMAGES="app log memcached mkdocs mysql solr"
 
 usage(){
   cat << EOF
