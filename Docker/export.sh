@@ -40,7 +40,7 @@ build_images(){
   for IMAGE in $IMAGES; do
     docker image pull "pmce/$BASE:$VERSION"
     echo "1. Building the image"
-    docker image build --compress --label=ce-vm-$IMAGE:$VERSION --no-cache=true -t "pmce/ce-vm-$IMAGE:$VERSION" "$OWN_DIR/derivatives" --build-arg playBook=$IMAGE.yml --build-arg versionTag=$VERSION || exit 1
+    docker image build --compress --label=ce-vm-$IMAGE:$VERSION --no-cache=true -t "pmce/ce-vm-$IMAGE:$VERSION" "$OWN_DIR/derivatives" --build-arg baseImage=$BASE --build-arg playBook=$IMAGE.yml --build-arg versionTag=$VERSION || exit 1
     echo "Publishing the image with docker image push pmce/ce-vm-$IMAGE:$VERSION"
     docker image push "pmce/ce-vm-$IMAGE:$VERSION"
   done

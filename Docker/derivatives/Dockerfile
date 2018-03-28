@@ -1,5 +1,6 @@
 ARG versionTag
-FROM pmce/ce-vm:$versionTag
+ARG baseImage
+FROM pmce/${baseImage}:$versionTag
 
 ARG playBook
 COPY ./${playBook} /tmp/
