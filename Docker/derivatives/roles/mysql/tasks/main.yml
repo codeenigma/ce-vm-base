@@ -32,11 +32,11 @@
 
 - name: Update MySQL root password.
   shell: >
-    mysql -u root -NBe 'GRANT ALL ON *.* TO "root"@"%" IDENTIFIED BY "root" WITH GRANT OPTION;'
+    mysql -NBe 'GRANT ALL ON *.* TO "root"@"%" IDENTIFIED BY "root" WITH GRANT OPTION;'
 
 - name: create "dev" MySQL user.
   shell: >
-    mysql -u root -NBe 'GRANT ALL ON *.* TO "dev"@"%" IDENTIFIED BY "dev";'
+    mysql -NBe 'GRANT ALL ON *.* TO "dev"@"%" IDENTIFIED BY "dev" WITH GRANT OPTION;;'
 
 - name: Ensure python-mysqldb is installed.
   apt:
