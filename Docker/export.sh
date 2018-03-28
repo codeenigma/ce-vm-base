@@ -3,8 +3,6 @@
 # (Re)build a Docker base box for ce-vm.
 #
 
-IMAGES="app log memcached mkdocs mysql solr"
-
 usage(){
   cat << EOF
 usage:
@@ -28,18 +26,39 @@ if [ -z "$OWN" ]; then
 fi
 OWN_DIR=$( cd "$( dirname "$OWN" )" && pwd -P)
 
+# Build all images recursively.
+# @param $1
+# Base image to use.
+# @param $2
+# Array of images to build.
+# @param $3
+# Version tag.
+build_images(){
+  BASE=$1
+  IMAGES=$2
+  VERSION=$3
+  for IMAGE in $IMAGES; do
+    docker image pull "pmce/$BASE:$VERSION"
+    echo "1. Building the image"
+    docker image build --compress --label=ce-vm-$IMAGE:$VERSION --no-cache=true -t "pmce/ce-vm-$IMAGE:$VERSION" "$OWN_DIR/derivatives" --build-arg playBook=$IMAGE.yml --build-arg versionTag=$VERSION || exit 1
+    echo "Publishing the image with docker image push pmce/ce-vm-$IMAGE:$VERSION"
+    docker image push "pmce/ce-vm-$IMAGE:$VERSION"
+  done
+}
+
 # Ensure we have a fresh image to start with.
 docker image pull debian:stretch
+
 # Build base image.
 echo "1. Building the image"
 docker image build --compress --label=ce-vm:$1 --no-cache=true -t "pmce/ce-vm:$1" "$OWN_DIR/base" || exit 1
 echo "Publishing the image with docker image push pmce/ce-vm:$1"
 docker image push "pmce/ce-vm:$1"
-# Build all images recursively.
-for IMAGE in $IMAGES; do
-  docker image pull "pmce/ce-vm:$1"
-  echo "1. Building the image"
-  docker image build --compress --label=ce-vm-$IMAGE:$1 --no-cache=true -t "pmce/ce-vm-$IMAGE:$1" "$OWN_DIR/derivatives" --build-arg playBook=$IMAGE.yml --build-arg versionTag=$1 || exit 1
-  echo "Publishing the image with docker image push pmce/ce-vm-$IMAGE:$1"
-  docker image push "pmce/ce-vm-$IMAGE:$1"
-done
+
+# Images built from the base.
+IMAGES="base-php log memcached mkdocs mysql solr"
+build_images 'ce-vm' "$IMAGES" "$1"
+
+IMAGES="base-cli fpm"
+# Derivatives.
+build_images 'ce-vm-base-php' "$IMAGES" "$1"
