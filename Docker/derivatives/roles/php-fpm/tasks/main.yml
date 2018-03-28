@@ -3,4 +3,4 @@
 - name: Install PHP packages.
   apt: "name={{ item }} state=present"
   with_items:
-    - "php{{ php_version }}-fpm"
+    - "php{{ php_version }}-fpm"  
