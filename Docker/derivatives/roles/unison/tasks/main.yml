@@ -1,0 +1,13 @@
+---
+
+- name: Download Unison
+  get_url:
+    url: "https://www.codeenigma.com/sites/default/files/unison-{{ unison_version }}"
+    dest: "/opt/unison"
+    mode: 0655
+
+- name: Download Unison FS Monitor
+  get_url:
+    url: "https://www.codeenigma.com/sites/default/files/unison-fsmonitor-{{ unison_version }}"
+    dest: "/opt/unison-fsmonitor"
+    mode: 0655

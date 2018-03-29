@@ -1,0 +1,4 @@
+---
+# Unison version. We're using a compiled custom binary,
+# so leave the default.
+unison_version: 2.48.4
