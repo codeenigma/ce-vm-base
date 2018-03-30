@@ -64,5 +64,5 @@ IMAGES="base-cli cevm fpm"
 build_images 'ce-vm-base-php' "$IMAGES" "$1"
 
 # Derivatives from base-cli.
-IMAGES="cli-drupal cli-wordpress"
+IMAGES="cli-drupal cli-wordpress cli-symfony3 cli-symfony4"
 build_images 'ce-vm-base-cli' "$IMAGES" "$1"

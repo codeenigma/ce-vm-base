@@ -1,0 +1,8 @@
+---
+
+- name: Download Symfony installer.
+  get_url:
+    url: https://symfony.com/installer
+    dest: /usr/local/bin/symfony
+    mode: 0755
+

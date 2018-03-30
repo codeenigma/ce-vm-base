@@ -3,7 +3,6 @@
 - hosts: localhost
   
   roles:
-    - { role: wordpress }
     - { role: php_codesniffer }
 
   tasks:
