@@ -1,0 +1,12 @@
+---
+
+- hosts: localhost
+  
+  roles:
+    - { role: php_codesniffer }
+
+  tasks:
+  - name: remove composer cache.
+    file:
+      path: '/home/vagrant/.composer/cache'
+      state: absent
