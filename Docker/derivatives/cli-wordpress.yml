@@ -1,0 +1,12 @@
+---
+
+- hosts: localhost
+  
+  roles:
+    - { role: wordpress }
+
+  tasks:
+  - name: remove composer cache.
+    file:
+      path: '/home/vagrant/.composer/cache'
+      state: absent

@@ -1,0 +1,7 @@
+---
+
+- name: Download WP-CLI installer.
+  get_url:
+    url: https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    dest: /usr/local/bin/wp
+    mode: 0755
