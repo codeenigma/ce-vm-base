@@ -59,6 +59,10 @@ docker image push "pmce/ce-vm:$1"
 IMAGES="base-php log memcached mkdocs mysql nginx solr"
 build_images 'ce-vm' "$IMAGES" "$1"
 
+# Derivatives from base-php.
 IMAGES="base-cli cevm fpm"
-# Derivatives.
 build_images 'ce-vm-base-php' "$IMAGES" "$1"
+
+# Derivatives from base-cli.
+IMAGES="cli-drupal"
+build_images 'ce-vm-base-cli' "$IMAGES" "$1"

@@ -1,0 +1,13 @@
+---
+
+- name: Install Drupal Console.
+  get_url:
+    url: https://drupalconsole.com/installer
+    dest: "/usr/local/bin/drupal"
+    mode: 0755
+
+- name: Run Drupal Console init.
+  command: >
+    /usr/local/bin/drupal init -n -y
+  become: true
+  become_user: vagrant

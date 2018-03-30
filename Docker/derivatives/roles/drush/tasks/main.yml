@@ -1,0 +1,13 @@
+---
+
+- name: Download Drush installer.
+  get_url:
+    url: https://github.com/drush-ops/drush/releases/download/8.1.16/drush.phar
+    dest: /usr/local/bin/drush
+    mode: 0755
+
+- name: Trigger drush init tasks.
+  command: >
+    /usr/local/bin/drush init -y
+  become: true
+  become_user: vagrant

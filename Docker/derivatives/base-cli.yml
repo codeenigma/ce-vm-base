@@ -17,3 +17,8 @@
     file:
       path: '/home/vagrant/.composer/cache'
       state: absent
+
+  - name: Ensure mysql-client is installed.
+    apt:
+      pkg: mysql-client
+      state: present
