@@ -4,4 +4,3 @@
   
   roles:
     - { role: php-cli, php_version: 7.1 }
-    - { role: nfs_server }
