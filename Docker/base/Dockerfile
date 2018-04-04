@@ -17,7 +17,7 @@ RUN \
   install -m 755 -o vagrant -g vagrant -d /home/vagrant && \
   install -m 700 -o vagrant -g vagrant -d /home/vagrant/.ssh && \
   curl https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant -o /home/vagrant/.ssh/id_rsa && \
-  https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub -o /home/vagrant/.ssh/authorized_keys \
+  curl https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub -o /home/vagrant/.ssh/authorized_keys \
   chmod 600 /home/vagrant/.ssh/id_rsa && \
   chmod 600 /home/vagrant/.ssh/authorized_keys && \
   chown -R vagrant:vagrant /home/vagrant/.ssh && \
