@@ -11,6 +11,10 @@ RUN \
   apt-get update && \
   apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
   apt-get install -y -o Dpkg::Options::="--force-confnew" ansible && \
+  curl https://www.codeenigma.com/sites/default/files/unison-2.48.4 -o /usr/local/bin/unison && \
+  curl https://www.codeenigma.com/sites/default/files/unison-fsmonitor-2.48.4 -o /usr/local/bin/unison-fsmonitor && \
+  chmod 0655 /usr/local/bin/unison && \
+  chmod 0655 /usr/local/bin/unison-fsmonitor && \
   useradd -s /bin/bash vagrant && \
   echo vagrant:vagrant | chpasswd -m && \
   install -m 755 -o vagrant -g vagrant -d /home/vagrant && \
@@ -29,7 +33,3 @@ RUN \
   rm -rf /var/lib/apt/lists/* && \
   apt-get clean && \
   rm /etc/apt/apt.conf.d/docker-clean
-
-EXPOSE 22
-CMD ["/usr/sbin/sshd", "-D"]
-
