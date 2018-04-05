@@ -12,6 +12,7 @@ RUN \
   apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
   ansible-playbook /tmp/${playBook} && \
   rm -rf /var/lib/apt/lists/* && \
+  rm -rf /tmp/* && \
   apt-get clean
 
 EXPOSE 22
