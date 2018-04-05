@@ -56,7 +56,7 @@ echo "Publishing the image with docker image push pmce/ce-vm:$1"
 docker image push "pmce/ce-vm:$1"
 
 # Images built from the base.
-IMAGES="base-php log memcached mkdocs mysql nginx solr"
+IMAGES="base-php log memcached mkdocs mysql nginx redis solr"
 build_images 'ce-vm' "$IMAGES" "$1"
 
 # Derivatives from base-php.
