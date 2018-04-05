@@ -60,7 +60,7 @@ IMAGES="base-php log memcached mkdocs mysql nginx redis solr"
 build_images 'ce-vm' "$IMAGES" "$1"
 
 # Derivatives from base-php.
-IMAGES="base-cli cevm fpm"
+IMAGES="base-cli dashboard fpm"
 build_images 'ce-vm-base-php' "$IMAGES" "$1"
 
 # Derivatives from base-cli.
