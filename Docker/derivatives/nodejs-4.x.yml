@@ -1,0 +1,7 @@
+---
+
+- hosts: localhost
+  
+  roles:
+    - { role: nodejs, nodejs_version: 4.x }
+    - { role: yarn }
