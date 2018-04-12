@@ -30,6 +30,7 @@ RUN \
     zsh && \
     rm -rf /var/lib/apt/lists/* && \
   apt-get clean  && \
+  rm -rf /tmp/* && \
   echo 'UseDNS no' >> /etc/ssh/sshd_config && \
   mkdir -p /var/run/sshd && \
   rm /usr/sbin/policy-rc.d
@@ -42,6 +43,7 @@ RUN \
   apt-get update && \
   apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
   apt-get install -y -o Dpkg::Options::="--force-confnew" ansible && \
+  rm -rf /tmp/* && \
   rm -rf /var/lib/apt/lists/* && \
   apt-get clean
 
@@ -50,6 +52,7 @@ RUN \
   export DEBIAN_FRONTEND=noninteractive && \
   curl https://www.codeenigma.com/sites/default/files/unison-2.48.4 -o /usr/local/bin/unison && \
   curl https://www.codeenigma.com/sites/default/files/unison-fsmonitor-2.48.4 -o /usr/local/bin/unison-fsmonitor && \
+  rm -rf /tmp/* && \
   chmod 0655 /usr/local/bin/unison && \
   chmod 0655 /usr/local/bin/unison-fsmonitor
 
@@ -62,6 +65,7 @@ RUN \
   install -m 700 -o vagrant -g vagrant -d /home/vagrant/.ssh && \
   curl https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant -o /home/vagrant/.ssh/id_rsa && \
   curl https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub -o /home/vagrant/.ssh/authorized_keys && \
+  rm -rf /tmp/* && \
   chmod 600 /home/vagrant/.ssh/id_rsa && \
   chmod 600 /home/vagrant/.ssh/authorized_keys && \
   chown -R vagrant:vagrant /home/vagrant/.ssh && \
