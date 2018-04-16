@@ -2,6 +2,10 @@
 
 - hosts: localhost
   
+  roles:
+    - { role: nodejs, nodejs_version: 8.x }
+    - { role: yarn }
+    
   tasks:
   - name: remove composer cache.
     file:
