@@ -16,5 +16,4 @@ RUN \
   apt-get clean
 
 EXPOSE 22
-CMD ["/usr/sbin/sshd", "-D"]
-
+CMD ["/bin/sh", "/opt/ce-vm-start.sh", "1000", "1000"]
