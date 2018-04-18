@@ -16,4 +16,4 @@
     state: directory
 
 - name: Create the SSL pem file.
-  shell: cat /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem > /etc/haproxy/haproxy.pem
+  shell: cat /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem > /etc/haproxy/ssl/haproxy.pem
