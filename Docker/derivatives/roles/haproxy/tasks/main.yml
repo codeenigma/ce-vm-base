@@ -1,0 +1,11 @@
+---
+# (Re) install HAproxy
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+
+- name: Ensure haproxy is installed.
+  apt:
+    pkg: haproxy
+    state: present
