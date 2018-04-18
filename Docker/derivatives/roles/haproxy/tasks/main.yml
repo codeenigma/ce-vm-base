@@ -9,3 +9,11 @@
   apt:
     pkg: haproxy
     state: present
+
+- name: Create HAProxy SSL folder.
+  file:
+    path: "/etc/haproxy/ssl"
+    state: directory
+
+- name: Create the SSL pem file.
+  shell: cat /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem > /etc/haproxy/haproxy.pem
