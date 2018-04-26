@@ -1,0 +1,54 @@
+---
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+    allow_unauthenticated: yes
+
+- name: Install JDK packages.
+  apt: 
+    name: "{{ item }}" 
+    state: present
+    allow_unauthenticated: yes
+  with_items:
+    - "openjdk-8-jre"
+    - "openjdk-8-jdk"
+ 
+- name: Install Sonar
+  apt:
+   deb: https://freefr.dl.sourceforge.net/project/sonar-pkg/deb/binary/sonar_7.1_all.deb
+
+- name: Allocate Elastic Search resources.
+  template: 
+    src: '99-sonar.conf.j2'
+    dest: '/etc/sysctl.d/99-sonar.conf'
+    owner: root
+    group: root
+
+- name: install Sonar Scanner
+  unarchive:
+    src: https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.1.0.1141-linux.zip
+    dest: /opt/
+    remote_src: yes
+
+- name: add Sonar Scanner to bin paths.
+  file:
+    src: "/opt/sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner"
+    dest: "/usr/local/bin/sonar-scanner"
+    state: link
+
+- name: Copy startup script in place.
+  template:
+    src: startup.sh.j2
+    dest: "/opt/run-parts/sonar"
+    owner: root
+    group: root
+    mode: 0555
+    force: yes
+
+- name: Copy landing page section.
+  template:
+    src: "section.html.j2"
+    dest: "{{ ce_vm_webroot }}/includes/sonar.html"
+    force: yes
+
