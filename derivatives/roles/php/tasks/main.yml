@@ -28,7 +28,6 @@
     - "php{{ php_version }}-imap"
     - "php{{ php_version }}-json"
     - "php{{ php_version }}-mbstring"
-    - "php{{ php_version }}-mcrypt"
     - "php{{ php_version }}-mysql"
     - "php{{ php_version }}-opcache"
     - "php{{ php_version }}-soap"
