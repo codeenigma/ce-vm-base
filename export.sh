@@ -70,3 +70,7 @@ build_images 'ce-vm-base-php' "$IMAGES" "$1"
 # Derivatives from base-cli.
 IMAGES="cli-custom cli-drupal cli-symfony3 cli-symfony4 cli-wordpress prototype"
 build_images 'ce-vm-base-cli' "$IMAGES" "$1"
+
+# Derivatives from nodejs.
+IMAGES="nightwatch"
+build_images 'ce-vm-nodejs-8.x' "$IMAGES" "$1"

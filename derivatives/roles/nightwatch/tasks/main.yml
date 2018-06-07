@@ -1,0 +1,41 @@
+---
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+
+- name: Install Selenium dependencies.
+  apt: "name={{ item }} state=present"
+  with_items:
+    - curl
+    - unzip
+    - default-jre
+    - firefox-esr
+    - chromium
+
+- name: Set Selenium major version
+  set_fact:
+    selenium_major_version: "{{ selenium_version | regex_replace('\\.[0-9]+$', '') }}"
+
+- name: Download Selenium
+  get_url:
+    url: "http://selenium-release.storage.googleapis.com/{{ selenium_major_version }}/selenium-server-standalone-{{ selenium_version }}.jar"
+    dest: "/opt/selenium-server-standalone.jar"
+
+- name: Download GeckoDriver
+  unarchive:
+    src: "https://github.com/mozilla/geckodriver/releases/download/v{{ gecko_version }}/geckodriver-v{{ gecko_version }}-linux64.tar.gz"
+    dest: /opt/
+    remote_src: yes
+
+- name: Download ChromeDriver
+  unarchive:
+    src: "https://chromedriver.storage.googleapis.com/{{ chrome_version }}/chromedriver_linux64.zip"
+    dest: /opt/
+    remote_src: yes
+
+
+- name: Install Nightwatch globally.
+  npm:
+    name: nightwatch
+    global: yes
