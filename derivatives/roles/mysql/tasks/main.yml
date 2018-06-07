@@ -1,7 +1,7 @@
 ---
 
 - name: Add repository key for MySQL repository.
-  apt_key: keyserver=pgp.mit.edu id=A4A9406876FCBD3C456770C88C718D3B5072E1F5 state=present
+  apt_key: keyserver=keyserver.ubuntu.com id=A4A9406876FCBD3C456770C88C718D3B5072E1F5 state=present
 
 - name: Add repository for MySQL.
   apt_repository: repo='deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7' state=present
