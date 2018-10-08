@@ -27,12 +27,12 @@
 
 - name: install Sonar Scanner
   unarchive:
-    src: https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.1.0.1141-linux.zip
+    src: https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
     dest: /opt/
     remote_src: yes
 
 - name: add Sonar Scanner to bin paths.
   file:
-    src: "/opt/sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner"
+    src: "/opt/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"
     dest: "/usr/local/bin/sonar-scanner"
     state: link
