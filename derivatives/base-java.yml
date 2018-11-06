@@ -3,4 +3,4 @@
 - hosts: localhost
   
   roles:
-    - { role: elastic, elastic_version: 6.x }
+    - { role: java }

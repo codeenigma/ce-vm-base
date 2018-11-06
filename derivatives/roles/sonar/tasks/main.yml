@@ -1,5 +1,10 @@
 ---
 
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+    allow_unauthenticated: yes
+
 - name: Install Sonar
   apt:
    deb: https://freefr.dl.sourceforge.net/project/sonar-pkg/deb/binary/sonar_7.1_all.deb

@@ -4,7 +4,12 @@
   apt_key: url=https://artifacts.elastic.co/GPG-KEY-elasticsearch state=present
 
 - name: Add repository for Elastic Search.
-  apt_repository: repo='deb https://artifacts.elastic.co/packages/6.x/apt stable main' state=present
+  apt_repository: repo='deb https://artifacts.elastic.co/packages/{{ elastic_version }}/apt stable main' state=present
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+    allow_unauthenticated: yes
 
 - name: Allocate Elastic Search resources.
   template: 
@@ -38,19 +43,4 @@
     owner: root
     group: elasticsearch
     mode: 0660
-    force: yes
-
-- name: Copy startup script in place.
-  template:
-    src: startup.sh.j2
-    dest: "/opt/run-parts/elastic"
-    owner: root
-    group: root
-    mode: 0555
-    force: yes
-
-- name: Copy landing page section.
-  template:
-    src: "section.html.j2"
-    dest: "{{ ce_vm_webroot }}/includes/elastic.html"
     force: yes
