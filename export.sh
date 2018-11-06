@@ -68,7 +68,7 @@ IMAGES="base-cli dashboard fpm"
 build_images 'ce-vm-base-php' "$IMAGES" "$1"
 
 # Derivatives from base-java.
-IMAGES="elastic sonar"
+IMAGES="elastic-5.x elastic-6.x sonar"
 build_images 'ce-vm-base-java' "$IMAGES" "$1"
 
 # Derivatives from base-cli.

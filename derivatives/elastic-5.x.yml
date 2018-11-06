@@ -1,0 +1,6 @@
+---
+
+- hosts: localhost
+  
+  roles:
+    - { role: elastic, elastic_version: 5.x }
