@@ -56,7 +56,7 @@ echo "Publishing the image with docker image push pmce/ce-vm:$1"
 docker image push "pmce/ce-vm:$1"
 
 # Images built from the base.
-IMAGES="base-php base-java haproxy log memcached mkdocs mysql nginx redis solr"
+IMAGES="base-java base-php haproxy log memcached mkdocs mysql nginx redis solr"
 build_images 'ce-vm' "$IMAGES" "$1"
 
 # NodeJS images built from the base.
@@ -68,7 +68,7 @@ IMAGES="base-cli dashboard fpm"
 build_images 'ce-vm-base-php' "$IMAGES" "$1"
 
 # Derivatives from base-java.
-IMAGES="sonar elastic"
+IMAGES="elastic sonar"
 build_images 'ce-vm-base-java' "$IMAGES" "$1"
 
 # Derivatives from base-cli.

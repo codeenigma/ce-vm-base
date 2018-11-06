@@ -3,13 +3,11 @@
 - name: Update apt cache.
   apt:
     update_cache: yes
-    allow_unauthenticated: yes
 
 - name: Install JDK packages.
   apt:
     name: "{{ item }}"
     state: present
-    allow_unauthenticated: yes
   with_items:
     - "openjdk-8-jre"
     - "openjdk-8-jdk"
