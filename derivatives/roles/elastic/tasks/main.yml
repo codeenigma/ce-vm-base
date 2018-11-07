@@ -1,0 +1,37 @@
+---
+
+- name: Add repository key for Elastic Search repository.
+  apt_key: url=https://artifacts.elastic.co/GPG-KEY-elasticsearch state=present
+
+- name: Add repository for Elastic Search.
+  apt_repository: repo='deb https://artifacts.elastic.co/packages/{{ elastic_version }}/apt stable main' state=present
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+    allow_unauthenticated: yes
+
+- name: Allocate Elastic Search resources.
+  template: 
+    src: '99-elastic.conf.j2'
+    dest: '/etc/sysctl.d/99-elastic.conf'
+    owner: root
+    group: root
+
+- name: Pin Elastic Search packages.
+  template:
+    src: elastic.pref.j2
+    dest: "/etc/apt/preferences.d/elastic.pref"
+    owner: root
+    group: root
+    mode: 0644
+    force: yes
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+
+- name: Ensure Elastic Search is installed.
+  apt:
+    pkg: "elasticsearch"
+    state: present
