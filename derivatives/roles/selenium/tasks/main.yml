@@ -5,16 +5,17 @@
     update_cache: yes
 
 - name: Install Selenium dependencies.
-  apt: "name={{ item }} state=present"
-  with_items:
-    - curl
-    - unzip
-    - default-jre
-    - firefox-esr
-    - chromium
-    - tightvncserver
-    - xvfb
-    - xterm
+  apt:
+    pkg:
+      - curl
+      - unzip
+      - default-jre
+      - firefox-esr
+      - chromium
+      - tightvncserver
+      - xvfb
+      - xterm
+    state: present
 
 - name: Set Selenium major version
   set_fact:
