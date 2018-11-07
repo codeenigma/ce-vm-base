@@ -1,6 +1,7 @@
 ---
 
 - name: Install PHP packages.
-  apt: "name={{ item }} state=present"
-  with_items:
-    - "php{{ php_version }}-fpm"  
+  apt:
+    pkg:
+      - "php{{ php_version }}-fpm"
+    state: present
