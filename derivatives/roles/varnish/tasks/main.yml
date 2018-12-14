@@ -1,0 +1,11 @@
+---
+# (Re) install Varnish
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+
+- name: Ensure Varnish is installed.
+  apt:
+    pkg: varnish
+    state: present
