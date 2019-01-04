@@ -5,4 +5,4 @@ services:
 before_install:
  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 script:
- - /bin/sh export.sh 6.0.1
+ - /bin/sh export.sh 6.0.2
