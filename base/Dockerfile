@@ -3,8 +3,8 @@ FROM debian:stretch
 RUN \
   set -x && \
   export DEBIAN_FRONTEND=noninteractive && \
-  apt-get update && \
-  apt-get dist-upgrade -y -o Dpkg::Options::="--force-confnew" && \
+  apt-get update -o Acquire::http::AllowRedirect=false && \
+  apt-get dist-upgrade -y -o Acquire::http::AllowRedirect=false -o Dpkg::Options::="--force-confnew" && \
   apt-get install -y -o Dpkg::Options::="--force-confnew" \
     apt-transport-https \
     apt-utils \
