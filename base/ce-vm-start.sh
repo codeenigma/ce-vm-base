@@ -34,4 +34,4 @@ fi
 if [ -e /run/sshd.pid ]; then
   rm /run/sshd.pid
 fi
-/usr/sbin/sshd -D &
+/usr/sbin/sshd -D
