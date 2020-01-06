@@ -60,7 +60,7 @@ IMAGES="base-java base-php haproxy log memcached mkdocs mysql nginx redis solr v
 build_images 'ce-vm' "$IMAGES" "$1"
 
 # NodeJS images built from the base.
-IMAGES="nodejs-4.x nodejs-6.x nodejs-8.x nodejs-9.x"
+IMAGES="nodejs-4.x nodejs-6.x nodejs-8.x nodejs-9.x nodejs-10.x nodejs-11.x nodejs-12.x"
 build_images 'ce-vm' "$IMAGES" "$1"
 
 # Derivatives from base-php.
