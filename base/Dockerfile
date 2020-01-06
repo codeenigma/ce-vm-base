@@ -28,7 +28,8 @@ RUN \
     vim \
     wget \
     zsh && \
-    rm -rf /var/lib/apt/lists/* && \
+  apt autoremove --purge  && \
+  rm -rf /var/lib/apt/lists/* && \
   apt-get clean  && \
   rm -rf /tmp/* && \
   echo 'UseDNS no' >> /etc/ssh/sshd_config && \
