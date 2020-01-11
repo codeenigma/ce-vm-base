@@ -3,8 +3,14 @@
 - name: Download Drush installer.
   get_url:
     url: https://github.com/drush-ops/drush/releases/download/8.3.2/drush.phar
-    dest: /usr/local/bin/drush
+    dest: /usr/local/bin/drush.phar
     mode: 0755
+
+- name: Symlink Drush.
+  file:
+    src: /usr/local/bin/drush.phar
+    dest: /usr/local/bin/drush
+    state: link
 
 - name: Trigger drush init tasks.
   command: >
